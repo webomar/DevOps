@@ -1,0 +1,13 @@
+---
+- name: Install fail2ban
+  hosts: app
+  become: yes
+  tasks:
+    - name: Install fail2ban
+      apt:
+        name: fail2ban
+        state: present
+    - name: Copy fail2ban configuration file
+      copy:
+        src: sshd.conf
+        dest: /etc/fail2ban/jail.d/sshd.conf

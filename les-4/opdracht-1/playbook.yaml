@@ -1,0 +1,15 @@
+---
+- hosts: app
+  become: true
+
+  tasks:
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+
+  handlers:
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted

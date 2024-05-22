@@ -1,0 +1,8 @@
+---
+- name: Update packages
+  hosts: app
+  become: yes
+  tasks:
+    - name: Update all packages
+      apt:
+        upgrade: yes

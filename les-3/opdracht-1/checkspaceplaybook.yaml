@@ -1,0 +1,11 @@
+---
+- name: Check available disk space
+  hosts: app
+  tasks:
+    - name: Run df -h command
+      shell: df -h
+      register: df_output
+    
+    - name: Display df output
+      debug:
+        msg: "{{ df_output.stdout }}"

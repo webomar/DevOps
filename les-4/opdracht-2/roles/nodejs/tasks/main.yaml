@@ -1,0 +1,15 @@
+---
+- name: Install Node.js
+  apt:
+    name: nodejs
+    state: present
+- name: Install NPM
+  apt:
+    name: npm
+    state: present
+
+- name: Install JSLint
+  npm:
+    name: jslint
+    global: yes
+    state: present

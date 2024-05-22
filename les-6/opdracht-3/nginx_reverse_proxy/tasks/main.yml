@@ -1,0 +1,32 @@
+- name: Pull NGINX Docker image
+  docker_image:
+    name: nginx
+    source: pull
+
+- name: Run first NGINX Docker container
+  docker_container:
+    name: nginx_server1
+    image: nginx
+    state: started
+    ports:
+      - "8080:80"  # Map container's port 80 to host's port 8080
+    volumes:
+      - "./bestanden/omar_studentnummber.html:/usr/share/nginx/html/index.html"  # Mount host directory containing greeting page
+
+- name: Run second NGINX Docker container
+  docker_container:
+    name: nginx_server2
+    image: nginx
+    state: started
+    ports:
+      - "8081:80"  # Map container's port 80 to host's port 8081
+    volumes:
+      - "./bestanden/omar_studentnummber.html:/usr/share/nginx/html/index.html"  # Mount host directory containing greeting page
+
+
+- name: Copy conf file
+  template:
+    src: reverse-proxy.conf
+    dest: /etc/nginx/sites-available/reverse-proxy.conf
+  notify:
+    - restart nginx

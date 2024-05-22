@@ -1,0 +1,9 @@
+---
+- name: Add user test
+  hosts: app
+  become: yes
+  tasks:
+    - name: Add user test
+      user:
+        name: test
+        state: present

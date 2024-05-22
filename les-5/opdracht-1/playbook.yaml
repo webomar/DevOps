@@ -1,0 +1,16 @@
+---
+- hosts: app
+  become: true
+
+  tasks:
+  - name: Install Apache2 package
+    apt:
+      name: apache2
+      state: present
+    register: apache_install_result
+
+
+  - name: Print message if Apache2 is installed successfully
+    debug:
+      msg: "Apache2 is installed successfully!"
+    when: apache_install_result.changed
